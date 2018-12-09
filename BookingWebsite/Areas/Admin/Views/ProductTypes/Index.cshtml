@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BookingWebsite.Models.ProductTypes>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br /><br />
+
+
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Product Type List</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp; New Product Type</a>
+    </div>
+    
+    
+
+</div>
+<br/>
+<div>
+    <table class="table table-striped">
+        <tr class="table-info">
+            <th>
+                @*Display name from model*@
+                @Html.DisplayNameFor(m => m.Name)
+
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        @*Using for each to retrieve list from database*@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m=>item.Name)
+                </td>
+                <td>
+                    <partial name="_TableButtonPartial" model="item.Id"/>
+                </td>
+                
+
+            </tr>
+        }
+
+    </table>
+
+</div>
