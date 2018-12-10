@@ -29,6 +29,7 @@ namespace BookingWebsite.Areas.Admin.Controllers
         {
             _db = db;
         }
+        
         public IActionResult Index()
         {
             
