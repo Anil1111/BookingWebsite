@@ -121,5 +121,73 @@ namespace BookingWebsite.Areas.Admin.Controllers
         }
 
 
+
+        // GET Details Action Method - retrieving  tag Id which user wants to view
+        public async Task<IActionResult> Details(int? id)
+        {
+            // if id is null return nor found
+            if (id == null)
+            {
+                return NotFound();
+
+            }
+            // if Id is not null, retrieve tags from database
+            var tags = await _db.Tags.FindAsync(id);
+            // check if tag is null, return not found
+            if (tags == null)
+            {
+                return NotFound();
+
+            }
+
+            return View(tags);
+
+        }
+
+
+
+        // GET Delete Action Method - retrieving Id which user wants to edit
+        public async Task<IActionResult> Delete(int? id)
+        {
+            // if id is null return nor found
+            if (id == null)
+            {
+                return NotFound();
+
+            }
+            // if Id is not null, retrieve tag from database
+            var tags = await _db.Tags.FindAsync(id);
+            // check if tag is null, return not found
+            if (tags == null)
+            {
+                return NotFound();
+
+            }
+            // if Tag is not null return vieW passing tags to the delete view
+            return View(tags);
+        }
+
+        //POST Delete action method
+
+        [HttpPost, ActionName("Delete")]
+
+        // build-in asp.net functionality
+        // With each request of httpPost AntiForgeryToken is added and passes along with the request
+        // Once it reaches the server it is checked if its valid (not be altered)
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id) // all we need to delete is an Id
+        {
+
+            // getting id from database
+            var productTypes = await _db.ProductTypes.FindAsync(id);
+            //once we hav an id we just need to remove
+            _db.ProductTypes.Remove(productTypes);
+            //save changes
+            await _db.SaveChangesAsync();
+            // return to index with product types ; using "nameof" helps prevent spelling errors
+            return RedirectToAction(nameof(Index));
+        }
+
+
     }
 }
