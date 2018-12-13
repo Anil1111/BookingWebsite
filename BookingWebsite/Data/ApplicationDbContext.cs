@@ -20,6 +20,9 @@ namespace BookingWebsite.Data
         // Add model for tags to database - passing tags to DBSet object
         public DbSet<Tags> Tags { get; set; }
 
+        // Add model for Product to database - passing Product to DBSet object
+        public DbSet<Products> Products { get; set; }
+
 
     }
 }
