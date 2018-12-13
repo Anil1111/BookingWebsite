@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookingWebsite.Controllers
 {
+    [Area("Admin")]
     public class ProductsController : Controller
     {
         // we need to access database
@@ -34,7 +35,7 @@ namespace BookingWebsite.Controllers
 
         }
 
-
+        
         public async Task<IActionResult> Index()
         {
 
